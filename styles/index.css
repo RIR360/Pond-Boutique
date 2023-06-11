@@ -1,5 +1,29 @@
+:root {
+    --primary: rgb(0, 128, 128);
+    --secondary: rgb(33, 86, 86);
+    --dark: rgb(9, 21, 21);
+    --light: white;
+}
+
 body {
-    background: white;
+    background: var(--light);
     margin: 0;
     padding: 0;
 }
+
+.cover {
+    width: 100%;
+}
+
+.pad-1 {
+    padding: 0.5rem;
+}
+
+.fixed {
+    position: fixed;
+}
+
+.absolute {
+    position: absolute;
+}
+
