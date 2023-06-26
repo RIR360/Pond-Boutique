@@ -15,15 +15,48 @@ body {
     width: 100%;
 }
 
+.height-full {
+    height: 100vh;
+}
+
+.hide-overflow {
+    overflow: hidden;
+}
+
 .pad-1 {
     padding: 0.5rem;
+}
+
+.pad-2 {
+    padding: 0.2rem;
 }
 
 .fixed {
     position: fixed;
 }
 
+.bring-front {
+    z-index: 1000;
+}
+
 .absolute {
     position: absolute;
 }
 
+.relative {
+    position: relative;
+}
+
+.smooth {
+    transition: transform ease 0.1s;
+}
+
+/* special classes */
+.glassmorphism-container {
+    background-color: rgba(255, 255, 255, 0.713);
+    backdrop-filter: blur(10px);
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+.bg-white {
+    background-color: white;
+}
