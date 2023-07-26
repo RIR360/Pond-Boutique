@@ -9,6 +9,7 @@ body {
     background: var(--light);
     margin: 0;
     padding: 0;
+    font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
 }
 
 .cover {
@@ -38,16 +39,95 @@ body {
 .nav-list li{
     display: inline-block;
 }
+
+.height-full {
+    height: 100vh;
+}
+
+.hide-overflow {
+    overflow: hidden;
+}
+
 .pad-1 {
     padding: 0.5rem;
+}
+
+.pad-1x {
+    padding: 1rem;
+}
+
+.pad-y-1x {
+    padding-top: 1rem;
+    padding-bottom: 1rem;
+}
+
+.pad-y-2x {
+    padding-top: 2rem;
+    padding-bottom: 2rem;
+}
+
+.pad-2 {
+    padding: 0.2rem;
 }
 
 .fixed {
     position: fixed;
 }
 
+.bring-front {
+    z-index: 1000;
+}
+
 .absolute {
     position: absolute;
 }
 
+.relative {
+    position: relative;
+}
 
+.smooth {
+    transition: transform ease 0.1s;
+}
+
+.flex {
+    display: flex;
+    flex-basis: auto;
+    justify-content: space-between;
+}
+
+.flex-item {
+    flex: 1;
+}
+
+/* font sizes */
+.fsize-small {
+    font-size: small;
+}
+.fsize-l {
+    font-size: large;
+}
+.fsize-xl {
+    font-size: x-large;
+}
+.fsize-xxl {
+    font-size: xx-large;
+}
+
+/* text colors */
+.text-primary {
+    color: var(--primary);
+}
+
+/* background colors */
+.bg-white {
+    background-color: white;
+}
+
+
+/* special classes */
+.glassmorphism-container {
+    background-color: rgba(255, 255, 255, 0.713);
+    backdrop-filter: blur(10px);
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
