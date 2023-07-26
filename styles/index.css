@@ -13,8 +13,31 @@ body {
 
 .cover {
     width: 100%;
+    
 }
-
+.flex {
+    display:flex;
+    align-items: center;
+    justify-content: space-between;
+}
+.flex-1 {
+    flex:1;
+}
+.type-none{
+    list-style-type: none;
+}
+.nav-links{
+    color: var(--dark);
+    text-decoration: none;
+    font-weight: bold;
+}
+.nav-links :hover{
+    color: var(--primary);
+    transition: 4s;
+}
+.nav-list li{
+    display: inline-block;
+}
 .pad-1 {
     padding: 0.5rem;
 }
@@ -26,4 +49,5 @@ body {
 .absolute {
     position: absolute;
 }
+
 
