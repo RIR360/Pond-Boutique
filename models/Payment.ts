@@ -1,17 +1,17 @@
 import mongoose, { Schema, Document } from "mongoose";
 
 export interface IPayment extends Document {
-  orderId: mongoose.Types.ObjectId;
+  order_id: mongoose.Types.ObjectId;
   amount: number;
-  method: "card" | "bkash" | "nagad" | "cash";
+  method: "bkash" | "cash";
   status: "success" | "failed" | "pending";
   createdAt: Date;
 }
 
 const PaymentSchema = new Schema<IPayment>({
-  orderId: { type: Schema.Types.ObjectId, ref: "Order", required: true },
+  order_id: { type: Schema.Types.ObjectId, ref: "Order", required: true },
   amount: Number,
-  method: { type: String, enum: ["card", "bkash", "nagad", "cash"], default: "card" },
+  method: { type: String, enum: ["bkash", "cash"], default: "bkash" },
   status: { type: String, enum: ["success", "failed", "pending"], default: "pending" },
   createdAt: { type: Date, default: Date.now },
 });

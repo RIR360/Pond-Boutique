@@ -1,19 +1,23 @@
 import mongoose, { Schema, Document } from "mongoose";
 
 export interface IExchangeRequest extends Document {
-  user: mongoose.Types.ObjectId;
-  order: mongoose.Types.ObjectId;
+  user_id: mongoose.Types.ObjectId;
+  order_id: mongoose.Types.ObjectId;
+  product_id: mongoose.Types.ObjectId;
   reason: string;
   status: "pending" | "approved" | "rejected";
   createdAt: Date;
+  updatedAt: Date;
 }
 
 const ExchangeRequestSchema = new Schema<IExchangeRequest>({
-  user: { type: Schema.Types.ObjectId, ref: "User" },
-  order: { type: Schema.Types.ObjectId, ref: "Order" },
+  user_id: { type: Schema.Types.ObjectId, ref: "User" },
+  order_id: { type: Schema.Types.ObjectId, ref: "Order" },
+  product_id: { type: Schema.Types.ObjectId, ref: "Product" },
   reason: String,
   status: { type: String, enum: ["pending", "approved", "rejected"], default: "pending" },
   createdAt: { type: Date, default: Date.now },
+  updatedAt: { type: Date, default: Date.now },
 });
 
 export default mongoose.models.ExchangeRequest ||
