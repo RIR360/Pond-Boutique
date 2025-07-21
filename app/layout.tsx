@@ -16,7 +16,7 @@ const geistMono = Geist_Mono({
 export const metadata: Metadata = {
   title: "Home | Pond Botique",
   description:
-    "Pond Botique is a small online shop specializing in water plants and pond-related items. We offer a curated selection of high-quality products to help you create and maintain a beautiful and thriving pond or water garden.",
+    "Pond Botique is a women's clothing brand that offers a curated selection of high-quality, unique, and comfortable clothing items for the woman. Our mission is to provide you with the best possible clothing experience, whether you're looking for casual everyday wear or a special occasion outfit.",
 };
 
 export default function RootLayout({
