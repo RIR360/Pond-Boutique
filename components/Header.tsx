@@ -1,45 +1,82 @@
-'use client';
+"use client"
 
-import Link from 'next/link';
-import { useState } from 'react';
+import Link from "next/link"
+import { ShoppingBag, Menu, Search, Leaf } from "lucide-react"
+import { Button } from "@/components/ui/button"
+import { Input } from "@/components/ui/input"
+import { Sheet, SheetContent, SheetHeader, SheetTitle, SheetTrigger } from "@/components/ui/sheet"
+import { useCart } from "./CartContact"
 
-export default function Navbar() {
-  const [menuOpen, setMenuOpen] = useState(false);
-  const toggleMenu = () => setMenuOpen(!menuOpen);
+export function SiteHeader() {
+  const { count } = useCart()
 
   return (
-    <nav className="bg-white shadow-lg">
-      <div className="container mx-auto flex justify-between items-center px-4 py-2 lg:px-8 lg:py-4">
-        <div className="text-lg font-bold">
-          <Link href="/" passHref>
-            <span className="text-2xl font-bold cursor-pointer">Logo</span>
+    <header className="sticky top-0 z-40 border-b bg-white/80 backdrop-blur supports-[backdrop-filter]:bg-white/60">
+      <div className="container mx-auto flex h-16 items-center justify-between px-4">
+        <div className="flex items-center gap-3">
+          <Sheet>
+            <SheetTrigger asChild>
+              <Button variant="ghost" size="icon" className="md:hidden" aria-label="Open menu">
+                <Menu className="h-5 w-5" />
+              </Button>
+            </SheetTrigger>
+            <SheetContent side="left">
+              <SheetHeader>
+                <SheetTitle>Pond Boutique</SheetTitle>
+              </SheetHeader>
+              <nav className="mt-6 grid gap-4 text-base">
+                <Link href="#" className="hover:text-emerald-700">
+                  New Arrivals
+                </Link>
+                <Link href="#" className="hover:text-emerald-700">
+                  Women
+                </Link>
+                <Link href="#" className="hover:text-emerald-700">
+                  Men
+                </Link>
+                <Link href="#" className="hover:text-emerald-700">
+                  Accessories
+                </Link>
+                <Link href="#" className="hover:text-emerald-700">
+                  Sale
+                </Link>
+              </nav>
+            </SheetContent>
+          </Sheet>
+          <Link href="/" className="flex items-center gap-2" aria-label="Pond Boutique Home">
+            <div className="flex h-8 w-8 items-center justify-center rounded-full bg-emerald-600 text-white">
+              <Leaf className="h-4 w-4" />
+            </div>
+            <span className="font-semibold tracking-tight">Pond Boutique</span>
           </Link>
         </div>
 
-        <button
-          className="lg:hidden"
-          onClick={toggleMenu}
-          aria-label="Toggle menu"
-        >
-          <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 6h16M4 12h16M4 18h16" />
-          </svg>
-        </button>
+        <div className="hidden max-w-md flex-1 items-center gap-2 md:flex">
+          <div className="relative w-full">
+            <Search className="pointer-events-none absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-neutral-400" />
+            <Input className="pl-9" placeholder="Search clothing, accessories, and more" aria-label="Search" />
+          </div>
+        </div>
 
-        <div className={`w-full lg:flex lg:items-center lg:w-auto ${menuOpen ? "block" : "hidden"}`}>
-          <ul className="flex flex-col lg:flex-row lg:space-x-8 py-4 lg:py-0">
-            {["Home", "About", "Services", "Contact"].map((item) => (
-              <li key={item}>
-                <Link href={`/${item === "Home" ? "" : item.toLowerCase()}`} passHref>
-                  <span className="block py-2 px-4 text-gray-700 hover:text-blue-500 cursor-pointer">
-                    {item}
-                  </span>
-                </Link>
-              </li>
-            ))}
-          </ul>
+        <div className="flex items-center gap-2">
+          <Button className="hidden md:inline-flex bg-emerald-600 hover:bg-emerald-700">
+            Sign in
+          </Button>
+          <Button variant="ghost" size="icon" aria-label="Open cart">
+            <div className="relative">
+              <ShoppingBag className="h-5 w-5" />
+              {count > 0 ? (
+                <span
+                  aria-live="polite"
+                  className="absolute -right-2 -top-2 grid h-5 w-5 place-items-center rounded-full bg-emerald-600 text-[11px] font-medium text-white"
+                >
+                  {count}
+                </span>
+              ) : null}
+            </div>
+          </Button>
         </div>
       </div>
-    </nav>
-  );
+    </header>
+  )
 }

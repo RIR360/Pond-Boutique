@@ -1,52 +1,22 @@
-import Header from "@/components/Header";
-import Footer from "@/components/Footer";
-import '@/app/styles/splide.min.css';
-import '@/app/styles/splide-core.min.css';
-import { Button } from "@/components/ui/button"
+import { CartProvider } from "@/components/CartContact"
+import { SiteHeader } from "@/components/Header"
+import { Hero } from "@/components/sections/Hero"
+import { FeaturedGrid } from "@/components/sections/FeaturedGrid"
+import { ProductGrid } from "@/components/sections/ProductGrid"
+import { SiteFooter } from "@/components/Footer"
 
-export default function Home() {
+export default function Page() {
   return (
-    <>
-      <section className="py-2 px-3 bg-teal-500 text-center text-white">
-        60% Off on All Products <Button>Shop Now</Button>
-      </section>
-      <Header />
-      <section className="bg-cover bg-center h-screen" style={{ backgroundImage: 'url("https://images.unsplash.com/photo-1682687982501-1e58ab814714?q=80&w=1170&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDF8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D")' }}>
-        <div className="container mx-auto px-6 md:px-12">
-          <div className="flex items-center h-screen">
-            <div className="text-center md:text-left md:w-1/2">
-              <h1 className="text-6xl font-bold text-white leading-tight mb-4">Welcome to Pond Boutique</h1>
-              <p className="text-2xl text-gray-200 mb-8">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed sit amet nulla auctor, vestibulum magna sed, convallis ex.</p>
-               <Button variant={"outline"}>Shop Now</Button>
-            </div>
-          </div>
-        </div>
-      </section>
-      <section className="bg-gray-100 py-8">
-        <div className="container mx-auto px-6 md:px-12">
-          <h2 className="text-3xl font-bold text-center mb-4">What We Do</h2>
-          <p className="text-xl text-gray-600 text-center mb-8">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed sit amet nulla auctor, vestibulum magna sed, convallis ex.</p>
-          <div className="grid grid-cols-1 md:grid-cols-4 gap-6">
-            <div className="bg-white p-6 rounded-lg shadow-lg">
-              <h4 className="text-2xl font-bold mb-2">Web Development</h4>
-              <p className="text-gray-600">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed sit amet nulla auctor, vestibulum magna sed, convallis ex.</p>
-            </div>
-            <div className="bg-white p-6 rounded-lg shadow-lg">
-              <h4 className="text-2xl font-bold mb-2">Web Design</h4>
-              <p className="text-gray-600">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed sit amet nulla auctor, vestibulum magna sed, convallis ex.</p>
-            </div>
-            <div className="bg-white p-6 rounded-lg shadow-lg">
-              <h4 className="text-2xl font-bold mb-2">Web Design</h4>
-              <p className="text-gray-600">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed sit amet nulla auctor, vestibulum magna sed, convallis ex.</p>
-            </div>
-            <div className="bg-white p-6 rounded-lg shadow-lg">
-              <h4 className="text-2xl font-bold mb-2">Web Design</h4>
-              <p className="text-gray-600">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed sit amet nulla auctor, vestibulum magna sed, convallis ex.</p>
-            </div>
-          </div>
-        </div>
-      </section>
-      <Footer />
-    </>
-  );
+    <CartProvider>
+      <div className="min-h-screen bg-white text-neutral-900">
+        <SiteHeader />
+        <main>
+          <Hero />
+          <FeaturedGrid />
+          <ProductGrid />
+        </main>
+        <SiteFooter />
+      </div>
+    </CartProvider>
+  )
 }

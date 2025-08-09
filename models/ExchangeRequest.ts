@@ -8,6 +8,7 @@ export interface IExchangeRequest extends Document {
   status: "pending" | "approved" | "rejected";
   createdAt: Date;
   updatedAt: Date;
+  dueDate: Date;
 }
 
 const ExchangeRequestSchema = new Schema<IExchangeRequest>({
@@ -18,6 +19,7 @@ const ExchangeRequestSchema = new Schema<IExchangeRequest>({
   status: { type: String, enum: ["pending", "approved", "rejected"], default: "pending" },
   createdAt: { type: Date, default: Date.now },
   updatedAt: { type: Date, default: Date.now },
+  dueDate: { type: Date },
 });
 
 export default mongoose.models.ExchangeRequest ||
