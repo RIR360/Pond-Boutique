@@ -4,6 +4,7 @@ import Image from "next/image"
 import { Button } from "@/components/ui/button"
 import { Badge } from "@/components/ui/badge"
 import { useCart } from "./CartContact"
+import Link from "next/link"
 
 export type ProductCardProps = {
   id?: string
@@ -23,7 +24,7 @@ export function ProductCard({
   label,
 }: ProductCardProps) {
   const { addItem } = useCart()
-  const formatted = new Intl.NumberFormat("en-US", { style: "currency", currency: "USD" }).format(price)
+  const formatted = `tk ${price}`
 
   return (
     <div className="group overflow-hidden rounded-xl border">
@@ -40,13 +41,20 @@ export function ProductCard({
         ) : null}
       </div>
       <div className="space-y-2 p-4">
-        <div className="flex items-start justify-between gap-3">
-          <h3 className="line-clamp-1 font-medium">{name}</h3>
-          <span className="shrink-0 font-semibold">{formatted}</span>
+        <div className="">
+          <h3 className="text-lg line-clamp-1 font-medium">{name}</h3>
+          <span className="text-teal-800 shrink-0 font-semibold">{formatted}</span>
         </div>
         <div className="flex gap-2">
+          <Link className="flex-1" href={`/products/${id}`}>
+            <Button
+              className="w-full bg-gray-600 hover:bg-gray-700"
+            >
+              View Product
+            </Button>
+          </Link>
           <Button
-            className="w-full bg-emerald-600 hover:bg-emerald-700"
+            className="bg-emerald-600 hover:bg-emerald-700"
             onClick={() => addItem({ id, name, price }, 1)}
             aria-label={"Add " + name + " to cart"}
           >

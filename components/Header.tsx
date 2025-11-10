@@ -11,7 +11,7 @@ export function SiteHeader() {
   const { count } = useCart()
 
   return (
-    <header className="sticky top-0 z-40 border-b bg-white/80 backdrop-blur supports-[backdrop-filter]:bg-white/60">
+    <header className="sticky top-0 z-40 border-b bg-white/80 backdrop-blur supports-[backdrop-filter]:bg-white/80">
       <div className="container mx-auto flex h-16 items-center justify-between px-4">
         <div className="flex items-center gap-3">
           <Sheet>
@@ -24,7 +24,7 @@ export function SiteHeader() {
               <SheetHeader>
                 <SheetTitle>Pond Boutique</SheetTitle>
               </SheetHeader>
-              <nav className="mt-6 grid gap-4 text-base">
+              <nav className="mt-6 grid gap-4 text-base ps-5">
                 <Link href="#" className="hover:text-emerald-700">
                   New Arrivals
                 </Link>
@@ -54,14 +54,16 @@ export function SiteHeader() {
         <div className="hidden max-w-md flex-1 items-center gap-2 md:flex">
           <div className="relative w-full">
             <Search className="pointer-events-none absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-neutral-400" />
-            <Input className="pl-9" placeholder="Search clothing, accessories, and more" aria-label="Search" />
+            <Input className="bg-white pl-9" placeholder="Search clothing, accessories, and more" aria-label="Search" />
           </div>
         </div>
 
         <div className="flex items-center gap-2">
-          <Button className="hidden md:inline-flex bg-emerald-600 hover:bg-emerald-700">
-            Sign in
-          </Button>
+          <Link href={"auth/signin"}>
+            <Button className="hidden md:inline-flex bg-emerald-600 hover:bg-emerald-700">
+              Sign in
+            </Button>
+          </Link>
           <Button variant="ghost" size="icon" aria-label="Open cart">
             <div className="relative">
               <ShoppingBag className="h-5 w-5" />

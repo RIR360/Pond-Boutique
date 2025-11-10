@@ -8,7 +8,7 @@ export function Hero() {
     <section
       className="relative overflow-hidden text-white"
       style={{
-        background: "url(https://images.pexels.com/photos/8886947/pexels-photo-8886947.jpeg) no-repeat center center / cover",
+        background: "url(/images/hero-bg.jpeg) no-repeat center center / cover",
       }}
     >
       <div className="bg-hero-gradient">
@@ -39,7 +39,7 @@ export function Hero() {
           <div className="relative">
             <div className="grid grid-cols-2 gap-3">
               <img
-                src="https://images.pexels.com/photos/9470640/pexels-photo-9470640.jpeg"
+                src="/images/pexels-photo-9470640.jpeg"
                 width={400}
                 height={520}
                 alt="Model wearing a linen dress near water"
@@ -47,14 +47,14 @@ export function Hero() {
               />
               <div className="grid gap-3">
                 <img
-                  src="https://images.pexels.com/photos/31874438/pexels-photo-31874438.jpeg"
+                  src="/images/pexels-photo-31874438.jpeg"
                   width={300}
                   height={250}
                   alt="Folded cotton shirts on a wooden table"
                   className="h-[200px] w-full rounded-xl object-cover md:h-[250px]"
                 />
                 <img
-                  src="https://images.pexels.com/photos/20777202/pexels-photo-20777202.jpeg"
+                  src="/images/pexels-photo-20777202.jpeg"
                   width={300}
                   height={260}
                   alt="Linen pants and a straw bag"

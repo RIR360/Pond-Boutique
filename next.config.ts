@@ -2,7 +2,16 @@ import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
   images: {
-    domains: ["community.softr.io", "images.pexels.com"],
+    remotePatterns: [
+      {
+        protocol: "https",
+        hostname: "community.softr.io",
+      },
+      {
+        protocol: "https",
+        hostname: "images.pexels.com",
+      },
+    ],
   },
 };
 

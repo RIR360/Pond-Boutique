@@ -17,21 +17,18 @@ export function SiteFooter() {
   }
 
   return (
-    <footer className="mt-12 border-t bg-slate-900 text-white">
-      <div className="container mx-auto px-5 py-10">
+    <footer className="border-t bg-slate-900 text-white">
+      <div className="max-w-7xl mx-auto px-5 py-10">
         <div className="grid gap-10 md:grid-cols-[1.2fr_1fr_1fr]">
           <div className="space-y-4">
             <Link href="/" className="flex items-center gap-2" aria-label="Pond Boutique Home">
               <div className="flex h-8 w-8 items-center justify-center rounded-full bg-emerald-600 text-white">
                 <Leaf className="h-4 w-4" />
               </div>
-              <span className="font-semibold tracking-tight">Pond Boutique</span>
+              <span className="text-2xl font-semibold tracking-tight">Pond Boutique</span>
             </Link>
             <p className="max-w-md text-sm text-neutral-200">
-              Timeless pieces inspired by nature. Designed for comfort, made to last.
-            </p>
-            <p className="text-xs text-neutral-200">
-              {"© " + new Date().getFullYear() + " Pond Boutique. All rights reserved."}
+              Timeless pieces inspired by nature. Designed for comfort, made to last. Our clothing is made from high-quality, sustainable materials that are gentle on the skin and the environment. We believe in slow fashion, where every piece is made to be loved and worn for years to come. By choosing Pond Boutique, you're supporting a more conscious and responsible approach to fashion.
             </p>
           </div>
 
@@ -101,7 +98,9 @@ export function SiteFooter() {
               Contact
             </Link>
           </div>
-          <p>{"Crafted with care — wear often."}</p>
+          <p className="text-gray-400">
+            {"© " + new Date().getFullYear() + " Pond Boutique. All rights reserved."}
+          </p>
         </div>
       </div>
     </footer>

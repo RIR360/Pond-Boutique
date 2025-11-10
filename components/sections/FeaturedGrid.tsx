@@ -4,25 +4,25 @@ const categories = [
   {
     title: "Sultry Sundresses",
     href: "#",
-    image: "https://images.pexels.com/photos/28213774/pexels-photo-28213774.jpeg",
+    image: "/images/pexels-photo-28213774.jpeg",
     alt: "Flowy summer dress outdoors",
   },
   {
     title: "Dresses That Dazzle",
     href: "#",
-    image: "https://images.pexels.com/photos/22064227/pexels-photo-22064227.jpeg",
+    image: "/images/pexels-photo-22064227.jpeg",
     alt: "Casual cotton tops neatly arranged",
   },
   {
     title: "Linen Luxe Dresses",
     href: "#",
-    image: "https://images.pexels.com/photos/22431192/pexels-photo-22431192.jpeg",
+    image: "/images/pexels-photo-22431192.jpeg",
     alt: "Neutral linen pants stacked",
   },
   {
     title: "Dress Up Your Style",
     href: "#",
-    image: "https://images.pexels.com/photos/31874446/pexels-photo-31874446.jpeg",
+    image: "/images/pexels-photo-31874446.jpeg",
     alt: "Straw bag and hat flatlay",
   },
 ]
@@ -31,7 +31,7 @@ export function FeaturedGrid() {
   return (
     <section id="featured" className="max-w-7xl mx-auto px-4 py-12 md:py-16">
       <div className="mb-6 flex items-center justify-between">
-        <h2 className="text-2xl font-semibold md:text-3xl mb-0 text-emerald-700">Featured categories</h2>
+        <h2 className="text-2xl font-semibold md:text-3xl mb-0 text-emerald-700">Featured Products</h2>
         <Link href="#" className="text-sm font-medium text-emerald-700 hover:underline">
           View all
         </Link>
@@ -40,7 +40,7 @@ export function FeaturedGrid() {
         {categories.map((cat) => (
           <Link
             key={cat.title}
-            href={cat.href}
+            href="/products/demo"
             className="group relative overflow-hidden rounded-xl"
             aria-label={cat.title}
           >

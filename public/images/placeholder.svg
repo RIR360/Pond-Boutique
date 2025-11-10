@@ -1,0 +1,11 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="800" viewBox="0 0 1200 800" preserveAspectRatio="xMidYMid meet">
+  <rect width="100%" height="100%" fill="#f3f4f6" />
+  <g fill="#d1d5db">
+    <rect x="120" y="120" width="960" height="560" rx="12" />
+  </g>
+  <g transform="translate(280,220)" fill="#9ca3af">
+    <path d="M160 0c-26 0-48 21-48 48v144c0 26 22 48 48 48s48-22 48-48V48c0-27-22-48-48-48z"/>
+    <path d="M96 200c0 53 43 96 96 96s96-43 96-96v-8H96v8z"/>
+  </g>
+  <text x="50%" y="740" font-size="20" text-anchor="middle" fill="#9ca3af">Placeholder image — add product images to /public/images</text>
+</svg>
