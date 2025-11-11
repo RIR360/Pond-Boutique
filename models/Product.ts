@@ -1,15 +1,6 @@
-import mongoose, { Schema, Document } from "mongoose";
+import { Schema, model, InferSchemaType } from "mongoose";
 
-export interface IProduct extends Document {
-  name: string;
-  description: string;
-  price: number;
-  stock: number;
-  images: string[];
-  category_id: mongoose.Types.ObjectId;
-}
-
-const ProductSchema = new Schema<IProduct>({
+const ProductSchema = new Schema({
   name: { type: String, required: true },
   description: String,
   price: { type: Number, required: true },
@@ -18,4 +9,7 @@ const ProductSchema = new Schema<IProduct>({
   category_id: { type: Schema.Types.ObjectId, ref: "Category" },
 });
 
-export default mongoose.models.Product || mongoose.model<IProduct>("Product", ProductSchema);
+// Automatically infer the TypeScript type from the schema
+export type Product = InferSchemaType<typeof ProductSchema>;
+
+export default model<Product>("Product", ProductSchema);

@@ -6,9 +6,11 @@ import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import { Sheet, SheetContent, SheetHeader, SheetTitle, SheetTrigger } from "@/components/ui/sheet"
 import { useCart } from "./CartContact"
+import { useRouter } from "next/navigation"
 
 export function SiteHeader() {
   const { count } = useCart()
+  const router = useRouter()
 
   return (
     <header className="sticky top-0 z-40 border-b bg-white/80 backdrop-blur supports-[backdrop-filter]:bg-white/80">
@@ -51,12 +53,18 @@ export function SiteHeader() {
           </Link>
         </div>
 
-        <div className="hidden max-w-md flex-1 items-center gap-2 md:flex">
+        <form className="hidden max-w-md flex-1 items-center gap-2 md:flex" onSubmit={(e) => {
+          e.preventDefault()
+          const searchQuery = e.currentTarget.querySelector('input')?.value || ""
+          if (searchQuery) {
+            router.push(`/products?search=${encodeURIComponent(searchQuery)}`)
+          }
+        }}>
           <div className="relative w-full">
             <Search className="pointer-events-none absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-neutral-400" />
             <Input className="bg-white pl-9" placeholder="Search clothing, accessories, and more" aria-label="Search" />
           </div>
-        </div>
+        </form>
 
         <div className="flex items-center gap-2">
           <Link href={"auth/signin"}>

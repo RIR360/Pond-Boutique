@@ -1,16 +1,6 @@
-import mongoose, { Schema, Document } from "mongoose";
+import { Schema, model, InferSchemaType } from "mongoose";
 
-export interface IUser extends Document {
-  name: string;
-  email: string;
-  phone: string;
-  address: string;
-  password: string;
-  isVerified: boolean;
-  createdAt: Date;
-}
-
-const UserSchema = new Schema<IUser>({
+const UserSchema = new Schema({
   name: { type: String, required: true },
   email: { type: String, required: true, unique: true },
   phone: { type: String, required: true },
@@ -18,6 +8,10 @@ const UserSchema = new Schema<IUser>({
   password: { type: String, required: true },
   isVerified: { type: Boolean, default: false },
   createdAt: { type: Date, default: Date.now },
-});
+}, { timestamps: true });
 
-export default mongoose.models.User || mongoose.model<IUser>("User", UserSchema);
+// Auto-generate TS type from schema
+export type User = InferSchemaType<typeof UserSchema>;
+
+// Safe model export (works in Next.js / hot reload)
+export default model<User>("User", UserSchema);

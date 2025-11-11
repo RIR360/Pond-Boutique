@@ -1,13 +1,11 @@
-import mongoose, { Schema, Document } from "mongoose";
+import { Schema, model, InferSchemaType } from "mongoose";
 
-export interface ICategory extends Document {
-  name: string;
-  description: string;
-}
-
-const CategorySchema = new Schema<ICategory>({
+const CategorySchema = new Schema({
   name: { type: String, required: true },
   description: { type: String, required: true, unique: true },
 });
 
-export default mongoose.models.Category || mongoose.model<ICategory>("Category", CategorySchema);
+// Infer the TS type directly from the schema
+export type Category = InferSchemaType<typeof CategorySchema>;
+
+export default model<Category>("Category", CategorySchema);

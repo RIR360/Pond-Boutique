@@ -32,7 +32,7 @@ export function FeaturedGrid() {
     <section id="featured" className="max-w-7xl mx-auto px-4 py-12 md:py-16">
       <div className="mb-6 flex items-center justify-between">
         <h2 className="text-2xl font-semibold md:text-3xl mb-0 text-emerald-700">Featured Products</h2>
-        <Link href="#" className="text-sm font-medium text-emerald-700 hover:underline">
+        <Link href="/products" className="text-sm font-medium text-emerald-700 hover:underline">
           View all
         </Link>
       </div>

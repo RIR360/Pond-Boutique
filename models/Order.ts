@@ -1,24 +1,19 @@
-import mongoose, { Schema, Document } from "mongoose";
+import { Schema, model, InferSchemaType } from "mongoose";
 
-export interface IOrder extends Document {
-  user_id: mongoose.Types.ObjectId;
-  products: { product_id: mongoose.Types.ObjectId; quantity: number }[];
-  status: "pending" | "shipped" | "delivered" | "cancelled";
-  total_amount: number; // amount
-  createdAt: Date;
-}
-
-const OrderSchema = new Schema<IOrder>({
+const OrderSchema = new Schema({
   user_id: { type: Schema.Types.ObjectId, ref: "User", required: true },
   products: [
     {
-      product_id: { type: Schema.Types.ObjectId, ref: "Product" },
+      product_id: { type: Schema.Types.ObjectId, ref: "Product", required: true },
       quantity: { type: Number, default: 1 },
     },
   ],
   status: { type: String, enum: ["pending", "shipped", "delivered", "cancelled"], default: "pending" },
-  total_amount: Number,
+  total_amount: { type: Number, required: true },
   createdAt: { type: Date, default: Date.now },
-});
+}, { timestamps: true });
 
-export default mongoose.models.Order || mongoose.model<IOrder>("Order", OrderSchema);
+// Automatically infer TS type from schema
+export type Order = InferSchemaType<typeof OrderSchema>;
+
+export default model<Order>("Order", OrderSchema);

@@ -1,15 +1,15 @@
-import mongoose, { Schema, Document } from "mongoose";
+import mongoose, { Schema, InferSchemaType } from "mongoose";
 
-export interface IAdmin extends Document {
-  name: string;
-  email: string;
-  password: string;
-}
+const AdminSchema = new Schema(
+  {
+    name: { type: String, required: true },
+    email: { type: String, required: true, unique: true },
+    password: { type: String, required: true },
+  },
+  { timestamps: true }
+);
 
-const AdminSchema = new Schema<IAdmin>({
-  name: { type: String, required: true },
-  email: { type: String, required: true, unique: true },
-  password: { type: String, required: true }
-});
+// Use InferSchemaType to automatically infer the TypeScript type
+export type IAdmin = InferSchemaType<typeof AdminSchema>;
 
 export default mongoose.models.Admin || mongoose.model<IAdmin>("Admin", AdminSchema);

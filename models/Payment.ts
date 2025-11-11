@@ -1,19 +1,14 @@
-import mongoose, { Schema, Document } from "mongoose";
+import { Schema, model, InferSchemaType } from "mongoose";
 
-export interface IPayment extends Document {
-  order_id: mongoose.Types.ObjectId;
-  amount: number;
-  method: "bkash" | "cash";
-  status: "success" | "failed" | "pending";
-  createdAt: Date;
-}
-
-const PaymentSchema = new Schema<IPayment>({
+const PaymentSchema = new Schema({
   order_id: { type: Schema.Types.ObjectId, ref: "Order", required: true },
-  amount: Number,
+  amount: { type: Number, required: true },
   method: { type: String, enum: ["bkash", "cash"], default: "bkash" },
   status: { type: String, enum: ["success", "failed", "pending"], default: "pending" },
   createdAt: { type: Date, default: Date.now },
-});
+}, { timestamps: true });
 
-export default mongoose.models.Payment || mongoose.model<IPayment>("Payment", PaymentSchema);
+// Infer TS type automatically from schema
+export type Payment = InferSchemaType<typeof PaymentSchema>;
+
+export default model<Payment>("Payment", PaymentSchema);
