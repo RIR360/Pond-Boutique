@@ -1,0 +1,162 @@
+[
+  {
+    "Name": "organza three piece",
+    "Price": "2800",
+    "Description": "cotton kameez & salwar with organa orna",
+    "Category": "Three Piece",
+    "Rating": "4.5",
+    "Image_url": "black organza three piece.jpg"
+  },
+  {
+    "Name": "moslin silk dress",
+    "Price": "1950",
+    "Description": "moslin silk",
+    "Category": "Three Piece",
+    "Rating": "4.3",
+    "Image_url": "Muslin silk base three piece set.jpg"
+  },
+  {
+    "Name": "pakintani inspired",
+    "Price": "3280",
+    "Description": "cotton kameez & salwar with organa orna",
+    "Category": "Three Piece",
+    "Rating": "4.7",
+    "Image_url": "Pakistani Design Boutique Three Piece.jpg"
+  },
+  {
+    "Name": "sadabahar inspired",
+    "Price": "1570",
+    "Description": "cotton lawn",
+    "Category": "Three Piece",
+    "Rating": "5",
+    "Image_url": "sadabahar inspired three piece.jpg"
+  },
+  {
+    "Name": "hand stitch embroidery ",
+    "Price": "2220",
+    "Description": "cotton",
+    "Category": "Three Piece",
+    "Rating": "4.8",
+    "Image_url": "embroidered hand loome shalwar kameez.jpg"
+  },
+  {
+    "Name": "Embroidery Worked Printed",
+    "Price": "1250",
+    "Description": "cotton printed",
+    "Category": "Three Piece",
+    "Rating": "4.4",
+    "Image_url": "cotton piece.jpeg"
+  },
+  {
+    "Name": "arong boutique",
+    "Price": "1480",
+    "Description": "cotton unstich",
+    "Category": "three Piece",
+    "Rating": "4.5",
+    "Image_url": "cotton boutique unstich.jpg"
+  },
+  {
+    "Name": "Red color handbag",
+    "Price": "990",
+    "Description": "pure leather",
+    "Category": "hand bag",
+    "Rating": "5",
+    "Image_url": "red bag.jpg"
+  },
+  {
+    "Name": "vintage design Louis Vuitton ",
+    "Price": "1670",
+    "Description": "pure leather",
+    "Category": "hand bag",
+    "Rating": "4.7",
+    "Image_url": "LV.jpg"
+  },
+  {
+    "Name": "Vintage Flower Pattern",
+    "Price": "2250",
+    "Description": "Vintage Flower Pattern",
+    "Category": "tote bag",
+    "Rating": "4.5",
+    "Image_url": "vintage bag.jpg"
+  },
+  {
+    "Name": "Women Backpack",
+    "Price": "1700",
+    "Description": "PU Leather ",
+    "Category": "backpack",
+    "Rating": "4.3",
+    "Image_url": "backpack.jpg"
+  },
+  {
+    "Name": "Women Luxury Designer Crossbody Bag",
+    "Price": "3240",
+    "Description": "Crocodile Leather",
+    "Category": "crossbody handbag",
+    "Rating": "5",
+    "Image_url": "crossbody bag.jpeg"
+  },
+  {
+    "Name": "south indian inspired neckpiece",
+    "Price": "8500",
+    "Description": "916 silver",
+    "Category": "neckpiece+earrings ",
+    "Rating": "4.4",
+    "Image_url": "silver-jewellery-je3xulzy.jpg"
+  },
+  {
+    "Name": "semi bridal oxidized silver polish",
+    "Price": "1320",
+    "Description": "oxidized silver polish",
+    "Category": "semi bridal",
+    "Rating": "4.8",
+    "Image_url": "oxidise set.jpeg"
+  },
+  {
+    "Name": "18k gold polished finger ring set",
+    "Price": "850",
+    "Description": "18k gold polish",
+    "Category": "finger ring",
+    "Rating": "5",
+    "Image_url": "Gold-PlatedAdjustableFingerRing.jpg"
+  },
+  {
+    "Name": "diamond cut set ",
+    "Price": "1550",
+    "Description": "AD stone diamond cut",
+    "Category": "neckpiece set",
+    "Rating": "5",
+    "Image_url": "necklace.jpg"
+  },
+  {
+    "Name": "bridal-traditional-wedding-ornament-exclusive",
+    "Price": "2500",
+    "Description": "Gold plated",
+    "Category": "choker-necklace-earr.",
+    "Rating": "4.6",
+    "Image_url": "jewellery-for-women--fashion-party-.jpeg"
+  },
+  {
+    "Name": "aawiya-hit-designer-festival-wear-lehenga combo for mother daughter",
+    "Price": "2300",
+    "Description": "samu silk",
+    "Category": "combo(mother+daughter)",
+    "Rating": "4.5",
+    "Image_url": "designer festiva wear lehenga combo for mother daughter.jpeg"
+  },
+  {
+    "Name": "pakistani imported designer dress",
+    "Price": "3200",
+    "Description": "silk jorjet",
+    "Category": "combo(mother+daughter)",
+    "Rating": "4.7",
+    "Image_url": "f6b0c5a29f83b136882c142acb4d0f50.jpg"
+  },
+  {
+    "Name": "traditional birthday gown",
+    "Price": "4200",
+    "Description": "rayon silk",
+    "Category": "combo(mother+daughter)",
+    "Rating": "4.4",
+    "Image_url": "gown3a92f851ff621b684e5bc5d6964731d9.jpg"
+  }
+]
