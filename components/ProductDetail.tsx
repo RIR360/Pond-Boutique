@@ -10,7 +10,7 @@ type ProductType = {
   name: string
   description?: string
   price: number
-  images?: string[]
+  image_url?: string
   stock?: number
 }
 
@@ -27,14 +27,14 @@ export default function ProductDetail({ product }: { product: ProductType }) {
     setTimeout(() => setAdded(false), 2000)
   }
 
-  const imageSrc = (product.images && product.images.length > 0 && product.images[0]) || "/images/placeholder.svg"
+  console.log(product.image_url);
 
   return (
     <section className="max-w-7xl mx-auto">
       <div className="grid md:grid-cols-2 gap-8 items-start py-16">
         <div className="bg-gray-50 rounded-lg p-6 flex items-center justify-center overflow-hidden group">
           <img
-            src={imageSrc}
+            src={`/images/products/${product.image_url}`}
             alt={product.name}
             className="max-h-96 object-contain w-full transform transition-transform duration-500 ease-in-out group-hover:scale-200 cursor-zoom-in"
           />
@@ -44,7 +44,7 @@ export default function ProductDetail({ product }: { product: ProductType }) {
           <h1 className="text-3xl font-bold mb-4">{product.name}</h1>
 
           <div className="flex items-baseline gap-4">
-            <p className="text-2xl text-emerald-600 font-semibold">tk {product.price.toFixed(2)}</p>
+            <p className="text-2xl text-emerald-600 font-semibold">tk {product.price}</p>
             {product.stock !== undefined && (
               <span className="text-sm text-neutral-500">{product.stock} in stock</span>
             )}

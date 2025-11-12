@@ -1,15 +1,17 @@
-import { Schema, model, InferSchemaType } from "mongoose";
+import { Schema, model, models, InferSchemaType, Types } from "mongoose";
 
 const ProductSchema = new Schema({
+  _id: Types.ObjectId,
   name: { type: String, required: true },
   description: String,
   price: { type: Number, required: true },
   stock: { type: Number, default: 0 },
-  images: [String],
-  category_id: { type: Schema.Types.ObjectId, ref: "Category" },
+  rating: { type: Number, default: 0 },
+  image_url: { type: String, required: true },
+  category: String,
 });
 
-// Automatically infer the TypeScript type from the schema
 export type Product = InferSchemaType<typeof ProductSchema>;
 
-export default model<Product>("Product", ProductSchema);
+// Prevent OverwriteModelError
+export default models.Product || model<Product>("Product", ProductSchema);

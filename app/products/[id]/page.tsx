@@ -3,6 +3,9 @@ import Product from "@/models/Product"
 import { notFound } from "next/navigation"
 import ProductDetail from "@/components/ProductDetail"
 import { CartProvider } from "@/components/CartContact"
+import { SiteHeader } from "@/components/Header"
+import { ProductGrid } from "@/components/sections/ProductGrid"
+import { SiteFooter } from "@/components/Footer"
 
 type Props = {
   params: {
@@ -13,21 +16,22 @@ type Props = {
 export default async function Page({ params }: Props) {
   await connectToDatabase()
 
-  const product = await Product.findById(params.id).lean()
+  const product = await Product.findById(params.id).lean();
+  const serializedProduct = JSON.parse(JSON.stringify(product));
 
   if (!product) {
     notFound()
   }
 
-  // Ensure the object is serializable for passing to a client component
-  const serializable = JSON.parse(JSON.stringify({ ...product, _id: product._id }))
-
   return (
     <CartProvider>
       <div className="min-h-screen bg-white text-neutral-900">
-        <main className="max-w-6xl mx-auto py-12 px-4">
-          <ProductDetail product={serializable} />
+        <SiteHeader />
+        <main>
+          <ProductDetail product={serializedProduct} />
+          <ProductGrid />
         </main>
+        <SiteFooter />
       </div>
     </CartProvider>
   )

@@ -28,11 +28,11 @@ export function ShopStory() {
             </p>
 
             <div className="grid grid-cols-2 gap-4 mb-8">
-              <div className="bg-white p-4 rounded-lg shadow">
+              <div className="p-4 rounded-lg border">
                 <p className="text-3xl font-bold text-emerald-600">15K+</p>
                 <p className="text-neutral-600">Happy Women</p>
               </div>
-              <div className="bg-white p-4 rounded-lg shadow">
+              <div className="p-4 rounded-lg border">
                 <p className="text-3xl font-bold text-teal-600">500+</p>
                 <p className="text-neutral-600">Timeless Pieces</p>
               </div>
@@ -56,7 +56,7 @@ export function ShopStory() {
               <p className="text-neutral-700 mb-6">
                 Every dress is thoughtfully designed to be both beautiful and kind to the planet.
               </p>
-              <div className="space-y-3 text-left">
+              <div className="space-y-3 flex flex-col items-center">
                 <div className="flex items-center gap-3">
                   <span className="text-2xl">🌳</span>
                   <p className="text-neutral-700">Eco-friendly, sustainable fabrics</p>
