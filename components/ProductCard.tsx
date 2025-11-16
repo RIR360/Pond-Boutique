@@ -5,6 +5,7 @@ import { Button } from "@/components/ui/button"
 import { Badge } from "@/components/ui/badge"
 import { useCart } from "./CartContact"
 import Link from "next/link"
+import { EyeIcon } from "lucide-react"
 
 export type ProductCardProps = {
   id?: string
@@ -30,7 +31,7 @@ export function ProductCard({
     <div className="group overflow-hidden rounded-xl border">
       <div className="relative">
         <Image
-          src={image || "/placeholder.svg"}
+          src={image || "/images/placeholder.svg"}
           alt={alt}
           width={400}
           height={400}
@@ -50,7 +51,7 @@ export function ProductCard({
             <Button
               className="w-full bg-gray-600 hover:bg-gray-700"
             >
-              View Product
+              <EyeIcon className="w-6 h-6" aria-hidden="true" />
             </Button>
           </Link>
           <Button
