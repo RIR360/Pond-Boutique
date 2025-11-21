@@ -3,6 +3,8 @@
 import type React from "react"
 
 import { useState } from "react"
+import { useRouter } from "next/navigation"
+import { signIn } from "next-auth/react"
 import Link from "next/link"
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
@@ -12,6 +14,7 @@ import { Alert, AlertDescription } from "@/components/ui/alert"
 import { Eye, EyeOff, Mail, Lock } from "lucide-react"
 
 export default function SignInPage() {
+  const router = useRouter()
   const [formData, setFormData] = useState({
     email: "",
     password: "",
@@ -19,6 +22,7 @@ export default function SignInPage() {
   const [errors, setErrors] = useState<Record<string, string>>({})
   const [showPassword, setShowPassword] = useState(false)
   const [isLoading, setIsLoading] = useState(false)
+  const [generalError, setGeneralError] = useState("")
 
   const validateEmail = (email: string) => {
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/
@@ -50,6 +54,9 @@ export default function SignInPage() {
     if (errors[field]) {
       setErrors((prev) => ({ ...prev, [field]: "" }))
     }
+    if (generalError) {
+      setGeneralError("")
+    }
   }
 
   const handleSubmit = async (e: React.FormEvent) => {
@@ -58,14 +65,23 @@ export default function SignInPage() {
     if (!validateForm()) return
 
     setIsLoading(true)
+    setGeneralError("")
 
-    // Simulate API call
     try {
-      await new Promise((resolve) => setTimeout(resolve, 1000))
-      console.log("Sign in attempt:", formData)
-      // Handle successful sign in here
-    } catch (error) {
-      console.error("Sign in error:", error)
+      const result = await signIn("credentials", {
+        email: formData.email,
+        password: formData.password,
+        redirect: false,
+      })
+
+      if (result?.error) {
+        setGeneralError(result.error)
+      } else if (result?.ok) {
+        router.push("/")
+        router.refresh()
+      }
+    } catch (error: any) {
+      setGeneralError(error.message || "An error occurred during sign in")
     } finally {
       setIsLoading(false)
     }
@@ -79,6 +95,11 @@ export default function SignInPage() {
           <CardDescription className="text-center">Sign in to your account to continue</CardDescription>
         </CardHeader>
         <CardContent>
+          {generalError && (
+            <Alert variant="destructive" className="mb-4">
+              <AlertDescription>{generalError}</AlertDescription>
+            </Alert>
+          )}
           <form onSubmit={handleSubmit} className="space-y-4">
             <div className="space-y-2">
               <Label htmlFor="email">Email</Label>

@@ -3,6 +3,8 @@
 import type React from "react"
 
 import { useState } from "react"
+import { useRouter } from "next/navigation"
+import { signIn } from "next-auth/react"
 import Link from "next/link"
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
@@ -13,6 +15,7 @@ import { Checkbox } from "@/components/ui/checkbox"
 import { Eye, EyeOff, Mail, Lock, User } from "lucide-react"
 
 export default function SignUpPage() {
+  const router = useRouter()
   const [formData, setFormData] = useState({
     name: "",
     email: "",
@@ -24,6 +27,7 @@ export default function SignUpPage() {
   const [showPassword, setShowPassword] = useState(false)
   const [showConfirmPassword, setShowConfirmPassword] = useState(false)
   const [isLoading, setIsLoading] = useState(false)
+  const [generalError, setGeneralError] = useState("")
 
   const validateEmail = (email: string) => {
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/
@@ -93,6 +97,9 @@ export default function SignUpPage() {
     if (errors[field]) {
       setErrors((prev) => ({ ...prev, [field]: "" }))
     }
+    if (generalError) {
+      setGeneralError("")
+    }
   }
 
   const handleSubmit = async (e: React.FormEvent) => {
@@ -101,14 +108,45 @@ export default function SignUpPage() {
     if (!validateForm()) return
 
     setIsLoading(true)
+    setGeneralError("")
 
-    // Simulate API call
     try {
-      await new Promise((resolve) => setTimeout(resolve, 1000))
-      console.log("Sign up attempt:", formData)
-      // Handle successful sign up here
-    } catch (error) {
-      console.error("Sign up error:", error)
+      // Register the user
+      const response = await fetch("/api/auth/register", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          name: formData.name,
+          email: formData.email,
+          password: formData.password,
+        }),
+      })
+
+      const data = await response.json()
+
+      if (!response.ok) {
+        setGeneralError(data.error || "Failed to create account")
+        setIsLoading(false)
+        return
+      }
+
+      // Automatically sign in after successful registration
+      const signInResult = await signIn("credentials", {
+        email: formData.email,
+        password: formData.password,
+        redirect: false,
+      })
+
+      if (signInResult?.error) {
+        setGeneralError("Account created but sign in failed. Please try signing in manually.")
+      } else if (signInResult?.ok) {
+        router.push("/")
+        router.refresh()
+      }
+    } catch (error: any) {
+      setGeneralError(error.message || "An error occurred during registration")
     } finally {
       setIsLoading(false)
     }
@@ -124,6 +162,11 @@ export default function SignUpPage() {
           <CardDescription className="text-center">Enter your details to create your account</CardDescription>
         </CardHeader>
         <CardContent>
+          {generalError && (
+            <Alert variant="destructive" className="mb-4">
+              <AlertDescription>{generalError}</AlertDescription>
+            </Alert>
+          )}
           <form onSubmit={handleSubmit} className="space-y-4">
             <div className="space-y-2">
               <Label htmlFor="name">Full Name</Label>

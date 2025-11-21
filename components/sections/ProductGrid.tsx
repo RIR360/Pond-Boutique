@@ -38,8 +38,8 @@ export function ProductGrid() {
   return (
     <section id="new-arrivals" className="max-w-7xl mx-auto px-4 py-12 md:py-16">
       <div className="mb-6">
-        <h2 className="text-2xl font-semibold md:text-3xl mb-0 text-emerald-700">New arrivals</h2>
-        <p className="text-neutral-600">Limited time offer!</p>
+        <h2 className="text-2xl font-semibold md:text-3xl mb-0 text-emerald-700">Other products</h2>
+        <p className="text-neutral-600">View our full collection</p>
       </div>
       <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 md:gap-6 lg:grid-cols-3 xl:grid-cols-4">
         {products.map((p) => (
