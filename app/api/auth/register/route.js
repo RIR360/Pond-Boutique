@@ -48,13 +48,11 @@ export async function POST(request) {
     const hashedPassword = await bcrypt.hash(password, 12)
 
     // Create user (phone and address are optional for now, can be updated later)
-    const user = await User.create({
-      name,
-      email,
-      password: hashedPassword,
-      phone: "", // Can be updated later
-      address: "", // Can be updated later
-    })
+    const userData = { name, email, password: hashedPassword }
+    if (body.phone && body.phone.trim() !== "") userData.phone = body.phone.trim()
+    if (body.address && body.address.trim() !== "") userData.address = body.address.trim()
+
+    const user = await User.create(userData)
 
     return NextResponse.json(
       {

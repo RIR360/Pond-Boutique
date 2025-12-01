@@ -22,8 +22,8 @@ export function Hero() {
             </p>
             <div className="flex flex-wrap gap-3">
               <Button asChild className="bg-emerald-600 hover:bg-emerald-700">
-                <Link href="#new-arrivals">
-                  <span className="text-white">Shop new arrivals</span>
+                <Link href="/products">
+                  <span className="text-white">Shop now</span>
                 </Link>
               </Button>
               <Button

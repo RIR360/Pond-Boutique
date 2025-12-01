@@ -11,12 +11,12 @@ export default function ProductDetail({ product }) {
   const [size, setSize] = useState(sizes[2])
 
   const handleAdd = () => {
-    addItem({ id: product._id, name: product.name, price: product.price }, qty)
+    addItem({ id: product._id, name: product.name, price: product.price, image: `/images/products/${product.image_url}` }, qty)
     setAdded(true)
     setTimeout(() => setAdded(false), 2000)
   }
 
-  console.log(product.image_url)
+  console.log(product)
 
   return (
     <section className="max-w-7xl mx-auto">
@@ -113,51 +113,16 @@ export default function ProductDetail({ product }) {
       </div>
 
       {/* Reviews & Related (simple stubs for demo) */}
-      <div className="mt-12 grid lg:grid-cols-3 gap-8">
-        <div className="lg:col-span-2">
+      <div className="lg:col-span-2">
           <h3 className="text-lg font-semibold mb-2">Customer reviews</h3>
           <div className="space-y-4">
             <div className="p-4 border rounded">
-              <div className="flex items-center justify-between mb-2">
-                <div className="font-semibold">Tahmina S.</div>
-                <div className="text-amber-400">★★★★☆</div>
-              </div>
               <div className="text-sm text-neutral-600">
-                Comfortable, elegant, and fits true to size. Love the fabric!
+                No reviews yet
               </div>
             </div>
           </div>
         </div>
-
-        <aside className="p-4 border rounded">
-          <h3 className="font-semibold mb-2">You may also like</h3>
-          <div className="space-y-3">
-            <div className="flex items-center gap-3">
-              <img
-                src="/images/pexels-photo-31874438.jpeg"
-                alt="alt"
-                className="w-12 h-12 object-cover rounded"
-              />
-              <div>
-                <div className="text-sm font-medium">Ruby Kameez</div>
-                <div className="text-xs text-neutral-500">tk 5000</div>
-              </div>
-            </div>
-
-            <div className="flex items-center gap-3">
-              <img
-                src="/images/pexels-photo-22431192.jpeg"
-                alt="alt"
-                className="w-12 h-12 object-cover rounded"
-              />
-              <div>
-                <div className="text-sm font-medium">Designer Kameez</div>
-                <div className="text-xs text-neutral-500">tk 4800</div>
-              </div>
-            </div>
-          </div>
-        </aside>
-      </div>
     </section>
   )
 }

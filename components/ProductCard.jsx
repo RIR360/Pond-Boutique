@@ -37,21 +37,15 @@ export function ProductCard({
           <h3 className="text-lg line-clamp-1 font-medium">{name}</h3>
           <span className="text-teal-800 shrink-0 font-semibold">{formatted}</span>
         </div>
-        <div className="flex gap-2">
+        <div className="flex gap-2 justify-content-center">
           <Link className="flex-1" href={`/products/${id}`}>
             <Button
               className="w-full bg-gray-600 hover:bg-gray-700"
             >
               <EyeIcon className="w-6 h-6" aria-hidden="true" />
+              View details
             </Button>
           </Link>
-          <Button
-            className="bg-emerald-600 hover:bg-emerald-700"
-            onClick={() => addItem({ id, name, price }, 1)}
-            aria-label={"Add " + name + " to cart"}
-          >
-            Add to cart
-          </Button>
         </div>
       </div>
     </div>

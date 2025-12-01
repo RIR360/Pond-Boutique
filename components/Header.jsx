@@ -6,11 +6,14 @@ import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import { Sheet, SheetContent, SheetHeader, SheetTitle, SheetTrigger } from "@/components/ui/sheet"
 import { useCart } from "./CartContact"
+import CartModal from "./CartModal"
 import { useRouter } from "next/navigation"
+import { useSession, signOut } from "next-auth/react"
 
 export function SiteHeader() {
   const { count } = useCart()
   const router = useRouter()
+  const { data: session } = useSession()
 
   return (
     <header className="sticky top-0 z-40 border-b bg-white/80 backdrop-blur supports-[backdrop-filter]:bg-white/80">
@@ -67,12 +70,25 @@ export function SiteHeader() {
         </form>
 
         <div className="flex items-center gap-2">
-          <Link href={"auth/signin"}>
-            <Button className="hidden md:inline-flex bg-emerald-600 hover:bg-emerald-700">
-              Sign in
-            </Button>
-          </Link>
-          <Button variant="ghost" size="icon" aria-label="Open cart">
+          {!session ? (
+            <Link href={"/auth/signin"}>
+              <Button className="hidden md:inline-flex bg-emerald-600 hover:bg-emerald-700">
+                Sign in
+              </Button>
+            </Link>
+          ) : (
+            <div className="flex items-center gap-2">
+              <span className="hidden md:inline-block text-sm text-neutral-700">Hi, {session.user?.name || session.user?.email}</span>
+              <Link href="/dashboard">
+                <Button className="bg-emerald-600 hover:bg-emerald-700">Dashboard</Button>
+              </Link>
+              <Button variant="ghost" onClick={() => signOut({ callbackUrl: "/" })}>
+                Sign out
+              </Button>
+            </div>
+          )}
+          <CartModal>
+            <Button variant="ghost" size="icon" aria-label="Open cart">
             <div className="relative">
               <ShoppingBag className="h-5 w-5" />
               {count > 0 ? (
@@ -84,10 +100,12 @@ export function SiteHeader() {
                 </span>
               ) : null}
             </div>
-          </Button>
+            </Button>
+          </CartModal>
         </div>
       </div>
     </header>
   )
 }
+
 

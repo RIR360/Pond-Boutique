@@ -1,4 +1,5 @@
 import Link from "next/link"
+import { Button } from "../ui/button"
 
 const categories = [
   {
@@ -34,18 +35,15 @@ export function FeaturedGrid() {
         <h2 className="text-2xl font-semibold md:text-3xl mb-0 text-emerald-700">
           Featured Categories
         </h2>
-        <Link
-          href="/products"
-          className="text-sm font-medium text-emerald-700 hover:underline"
-        >
-          View all
+        <Link href="/products">
+          <Button size="sm" variant={"outline"}>View all</Button>
         </Link>
       </div>
       <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
         {categories.map(cat => (
           <Link
             key={cat.title}
-            href="/products/demo"
+            href="/products"
             className="group relative overflow-hidden rounded-xl"
             aria-label={cat.title}
           >

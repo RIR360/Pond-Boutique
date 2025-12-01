@@ -1,4 +1,4 @@
-import { Schema, model } from "mongoose";
+import mongoose, { Schema, model } from "mongoose";
 
 const ExchangeRequestSchema = new Schema(
   {
@@ -16,5 +16,5 @@ const ExchangeRequestSchema = new Schema(
   { timestamps: true }
 );
 
-export default model("ExchangeRequest", ExchangeRequestSchema);
+export default mongoose.models.ExchangeRequest || model("ExchangeRequest", ExchangeRequestSchema);
 

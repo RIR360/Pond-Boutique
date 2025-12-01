@@ -26,6 +26,14 @@ export function CartProvider({ children }) {
 
   const clear = () => setItems([])
 
+  const removeItem = (id) => {
+    setItems(prev => prev.filter(i => i.id !== id))
+  }
+
+  const updateQty = (id, qty) => {
+    setItems(prev => prev.map(i => i.id === id ? { ...i, qty } : i))
+  }
+
   const count = useMemo(() => items.reduce((acc, i) => acc + i.qty, 0), [items])
 
   const value = useMemo(
@@ -33,6 +41,8 @@ export function CartProvider({ children }) {
       items,
       count,
       addItem,
+      removeItem,
+      updateQty,
       clear,
     }),
     [items, count],
