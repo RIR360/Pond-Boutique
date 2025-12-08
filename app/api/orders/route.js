@@ -11,7 +11,13 @@ export async function POST(req) {
 
   const body = await req.json()
   const items = body.items || []
+  const paymentMethod = body.payment_method || "cod"
+  const note = body.note || ""
+  const shipping = body.shipping || {}
   if (!Array.isArray(items) || items.length === 0) return NextResponse.json({ message: "No items provided" }, { status: 400 })
+  if (!["online", "cod"].includes(paymentMethod)) {
+    return NextResponse.json({ message: "Invalid payment method" }, { status: 400 })
+  }
 
   await connectToDatabase()
 
@@ -38,6 +44,10 @@ export async function POST(req) {
     user_id: session.user.id,
     products: processed,
     total_amount: total,
+    status: "pending",
+    payment_method: paymentMethod,
+    note,
+    shipping,
   })
 
   // Optionally decrement stock

@@ -4,9 +4,10 @@ import ProductsList from "@/components/ProductsList"
 import { SiteHeader } from "@/components/Header"
 import { SiteFooter } from "@/components/Footer"
 
-export default async function Page() {
+export default async function Page({ searchParams = {} }) {
   await connectToDatabase()
   const products = await Product.find({}).lean()
+  const search = searchParams?.search || ""
 
   const serializable = products.map((p) => ({
     _id: p._id?.toString?.() ?? String(p._id),
@@ -21,7 +22,7 @@ export default async function Page() {
     <div className="min-h-screen bg-white text-neutral-900">
       <SiteHeader />
       <main className="max-w-7xl mx-auto py-12">
-        <ProductsList products={serializable} />
+        <ProductsList products={serializable} initialQuery={search} />
       </main>
       <SiteFooter />
     </div>

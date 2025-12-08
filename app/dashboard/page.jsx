@@ -3,8 +3,14 @@ import { getServerSession } from "next-auth/next"
 import { authOptions } from "@/auth"
 import connectToDatabase from "@/lib/connectDB"
 import Order from "@/models/Order"
+import User from "@/models/User"
+import Product from "@/models/Product"
+import AdminDashboard from "@/components/AdminDashboard"
+import OrdersSection from "@/components/OrdersSection"
 import { SiteHeader } from "@/components/Header"
 import { SiteFooter } from "@/components/Footer"
+
+const ADMIN_EMAIL = "pond.admin@gmail.com"
 
 export default async function Page() {
   const session = await getServerSession(authOptions)
@@ -14,14 +20,49 @@ export default async function Page() {
 
   const userFromSession = session.user || {}
 
-  // Fetch minimal order info for this user
-  const ordersFromDB = await Order.find({ user_id: session.user?.id }).lean()
-  const orders = ordersFromDB.map((o) => ({
-    id: o._id.toString(),
-    date: o.createdAt,
-    total: o.total_amount || 0,
-    status: o.status || "pending",
-  }))
+  const isAdmin = userFromSession.email === ADMIN_EMAIL
+
+  let orders = []
+  let adminUsers = []
+  let adminProducts = []
+
+  if (isAdmin) {
+    const [usersFromDB, productsFromDB] = await Promise.all([
+      User.find({}, { password: 0 }).sort({ createdAt: -1 }).lean(),
+      Product.find({}).sort({ createdAt: -1 }).lean(),
+    ])
+
+    adminUsers = usersFromDB.map((u) => ({
+      id: u._id?.toString?.() ?? "",
+      name: u.name,
+      email: u.email,
+      phone: u.phone || "",
+      address: u.address || "",
+      createdAt: u.createdAt,
+    }))
+
+    adminProducts = productsFromDB.map((p) => ({
+      id: p._id?.toString?.() ?? "",
+      name: p.name,
+      price: p.price,
+      stock: p.stock ?? 0,
+      image_url: p.image_url || "",
+      description: p.description || "",
+      category: p.category || "",
+    }))
+  } else {
+    // Fetch minimal order info for this user
+    const ordersFromDB = await Order.find({ user_id: session.user?.id }).sort({ createdAt: -1 }).lean()
+    orders = ordersFromDB.map((o) => ({
+      id: o._id.toString(),
+      date: o.createdAt,
+      total: o.total_amount || 0,
+      status: o.status || "pending",
+      payment_method: o.payment_method || "cod",
+      payment_status: o.payment_status || "pending",
+      shipping_status: o.shipping_status || "processing",
+    }))
+  }
 
   return (
     <div className="min-h-screen bg-gray-50">
@@ -30,47 +71,35 @@ export default async function Page() {
       <main className="max-w-6xl mx-auto px-4 py-8">
         <div className="bg-white shadow-sm border-b mb-6 rounded">
           <div className="p-6">
-            <h1 className="text-3xl font-bold text-neutral-900">My Dashboard</h1>
-            <p className="text-neutral-600 mt-1">Welcome back{userFromSession?.name ? `, ${userFromSession.name}` : "!"}</p>
+            <h1 className="text-3xl font-bold text-neutral-900">
+              {isAdmin ? "Admin Dashboard" : "My Dashboard"}
+            </h1>
+            <p className="text-neutral-600 mt-1">
+              Welcome back{userFromSession?.name ? `, ${userFromSession.name}` : "!"}
+            </p>
+            {isAdmin && (
+              <p className="text-sm text-emerald-700 font-medium mt-2">
+                You are signed in as the store administrator.
+              </p>
+            )}
           </div>
         </div>
 
-        <div className="grid md:grid-cols-3 gap-6">
-          <section className="md:col-span-1 bg-white rounded-lg shadow p-6">
-            <h2 className="text-xl font-semibold mb-3">Profile</h2>
-            <p className="text-sm text-neutral-500">Name</p>
-            <p className="text-lg font-semibold">{userFromSession?.name || "-"}</p>
-            <p className="text-sm text-neutral-500 mt-3">Email</p>
-            <p className="text-lg font-semibold">{userFromSession?.email || "-"}</p>
-          </section>
+        {isAdmin ? (
+          <AdminDashboard users={adminUsers} products={adminProducts} />
+        ) : (
+          <div className="grid md:grid-cols-3 gap-6">
+            <section className="md:col-span-1 bg-white rounded-lg shadow p-6">
+              <h2 className="text-xl font-semibold mb-3">Profile</h2>
+              <p className="text-sm text-neutral-500">Name</p>
+              <p className="text-lg font-semibold">{userFromSession?.name || "-"}</p>
+              <p className="text-sm text-neutral-500 mt-3">Email</p>
+              <p className="text-lg font-semibold">{userFromSession?.email || "-"}</p>
+            </section>
 
-          <section className="md:col-span-2 bg-white rounded-lg shadow p-6">
-            <div className="flex items-center justify-between mb-4">
-              <h2 className="text-xl font-semibold">Order History</h2>
-              <div className="text-sm text-neutral-600">{orders.length} order{orders.length !== 1 ? "s" : ""}</div>
-            </div>
-
-            {orders.length === 0 ? (
-              <p className="text-neutral-600">No orders yet.</p>
-            ) : (
-              <div className="space-y-4">
-                {orders.map((order) => (
-                  <div key={order.id} className="border rounded p-4 flex items-center justify-between">
-                    <div>
-                      <div className="text-sm text-neutral-500">Order ID</div>
-                      <div className="font-semibold">{order.id}</div>
-                    </div>
-                    <div className="text-right">
-                      <div className="text-sm text-neutral-500">Date</div>
-                      <div className="font-semibold">{new Date(order.date).toLocaleDateString()}</div>
-                    </div>
-                    <div className="text-right font-semibold">tk {order.total}</div>
-                  </div>
-                ))}
-              </div>
-            )}
-          </section>
-        </div>
+            <OrdersSection orders={orders} />
+          </div>
+        )}
       </main>
 
       <SiteFooter />

@@ -56,16 +56,18 @@ export function SiteHeader() {
           </Link>
         </div>
 
-        <form className="hidden max-w-md flex-1 items-center gap-2 md:flex" onSubmit={(e) => {
-          e.preventDefault()
-          const searchQuery = e.currentTarget.querySelector('input')?.value || ""
-          if (searchQuery) {
-            router.push(`/products?search=${encodeURIComponent(searchQuery)}`)
-          }
-        }}>
+        <form
+          className="hidden max-w-md flex-1 items-center gap-2 md:flex"
+          onSubmit={(e) => {
+            e.preventDefault()
+            const searchQuery = e.currentTarget.querySelector("input")?.value || ""
+            const url = searchQuery ? `/products?search=${encodeURIComponent(searchQuery)}` : "/products"
+            router.push(url)
+          }}
+        >
           <div className="relative w-full">
             <Search className="pointer-events-none absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-neutral-400" />
-            <Input className="bg-white pl-9" placeholder="Search clothing, accessories, and more" aria-label="Search" />
+            <Input className="bg-white pl-9" placeholder="Search clothing, accessories, and more" aria-label="Search products" defaultValue="" />
           </div>
         </form>
 

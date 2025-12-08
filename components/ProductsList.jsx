@@ -5,8 +5,8 @@ import { ProductCard } from "@/components/ProductCard"
 import { Input } from "@/components/ui/input"
 import { Button } from "@/components/ui/button"
 
-export default function ProductsList({ products }) {
-  const [query, setQuery] = useState("")
+export default function ProductsList({ products, initialQuery = "" }) {
+  const [query, setQuery] = useState(initialQuery)
   const [minPrice, setMinPrice] = useState("")
   const [maxPrice, setMaxPrice] = useState("")
   const [inStockOnly, setInStockOnly] = useState(false)
